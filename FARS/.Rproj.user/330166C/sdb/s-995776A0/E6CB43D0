@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1489252667704.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E6CB43D0",
+    "lastKnownWriteTime" : 3186359649045577734,
+    "last_content_update" : 1489252667704,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "CBDC8215",
+        "caption" : "fars",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=fars&cache_key=CBDC8215",
+        "displayedObservations" : "31607",
+        "environment" : "",
+        "object" : "fars",
+        "preview" : "0",
+        "totalObservations" : "31607",
+        "variables" : "52"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1489239960169.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "A51A05B4",
+    "lastKnownWriteTime" : 8101746180817420294,
+    "last_content_update" : 1489239960169,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "98344C18",
+        "caption" : "accidentsByWeather3State",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=accidentsByWeather3State&cache_key=98344C18",
+        "displayedObservations" : "21",
+        "environment" : "",
+        "object" : "accidentsByWeather3State",
+        "preview" : "0",
+        "totalObservations" : "21",
+        "variables" : "3"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

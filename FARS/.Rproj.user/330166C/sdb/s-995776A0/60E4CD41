@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ggplot2)\nlibrary(ggmap)\nlibrary(dplyr)\nlibrary(plotly)\n\n\naccident <- read.csv(\"2015accident.csv\", header = T, sep = \",\")\n\n#map\n\n  us <- c(left = -125, bottom = 25.75, right = -67, top = 49)\n  map <- get_stamenmap(us, zoom = 6, maptype = \"toner-lite\")\n  USAMap = ggmap(map)\n\n  #dealing data\n  mydata = read.csv(\"2015accident.csv\")\n  mydata$State <- as.character(mydata$STATE)\n  \n  mv_num_fatal = data.frame(mydata$FATALS, mydata$LONGITUD, mydata$LATITUDE)\n  colnames(mv_num_fatal) = c('fatal','lon','lat')\n  \n  usa_center = as.numeric(geocode(\"United States\"))\n  \n  USAMap + geom_point(aes(x=lon, y=lat), data=mv_num_fatal, col=\"#FAEE1C\", alpha=0.1, size=mv_num_fatal$fatal*1.5) + scale_size_continuous(range=range(mv_num_fatal$fatal))\n  \n  \n  #other map\n  usa <- map_data(\"usa\")\n  ggplot() + geom_polygon(data = usa, aes(x=long, y = lat, group = group)) + \n    coord_fixed(1.3)\n  \n  map_usa + geom_point(aes(x=lon, y=lat), data=mv_num_fatal, col=\"#FAEE1C\", alpha=0.1, size=mv_num_fatal$fatal*1.5) + scale_size_continuous(range=range(mv_num_fatal$fatal))\n  \n#statistic description\n  summary(fars$FATALS)\n  sd(fars$FATALS)\n  \n   \n#rectangle\n  \n  #by day\n  accident$yearDay <- paste(accident$YEAR,accident$MONTH,accident$DAY)\n  accident$yearDay <- factor(accident$yearDay,levels=rev(unique(accident$yearDay)))\n  \n  ggplot(accident, aes(STATE, yearDay)) +\n    geom_raster(aes(fill = FATALS))\n  \n  #by month\n  accident$yearMonth <- paste(accident$YEAR,accident$MONTH)\n  accident$yearMonth <- factor(accident$yearMonth,levels=rev(unique(accident$yearMonth)))\n  \n  by_Month <- group_by(accident, STATE, yearMonth)\n  sum_fatals_by_month = summarise(by_Month, total=sum(FATALS))\n  View(sum_fatals_by_month)\n  \n  ggplot(sum_fatals_by_month, aes(STATE, yearMonth)) +\n    geom_raster(aes(fill = total)) + scale_fill_gradientn(colours=c(\"#F6F5F5\",\"#FAEE1C\",\"#F02A71\"))\n  ggplotly()\n\n  \n#3 states' fatals in hours\n  fars <- subset(fars, !(HOUR == 99))\n  \n  group <- group_by(fars, STATE, HOUR)\n  accidentsByHour <- summarize(group, FATALS = n())\n  accidentsByHour3State <- filter(accidentsByHour, STATE == 6 | STATE == 12 | STATE == 48)\n  \n  \n  ggplot(accidentsByHour3State, aes(HOUR, FATALS)) +\n    geom_point(color = \"#FAEE1C\" ) +\n    labs(x = \"Hour\", y = \"Number of fatalities\") +\n    geom_smooth(color = \"#F02A71\" ,fill = \"#d7d7d8\") +\n    facet_grid(STATE~.)+\n    theme_bw(base_family = \"Helvetica\")\n  \n#weather factor resulting in accidents\n  fars <- subset(fars, !(WEATHER == 98 | WEATHER == 99))\n  \n  groupWeather <- group_by(fars, STATE, WEATHER)\n  accidentsByWeather <- summarize(groupWeather, FATALS = n())\n  accidentsByWeather3State <- filter(accidentsByWeather, STATE == 6 | STATE == 12 | STATE == 48)\n  \n  ggplot(accidentsByWeather3State, aes(STATE,FATALS, fill = WEATHER)) + \n    geom_bar(position = \"fill\", stat = 'identity') +\n    scale_fill_gradientn(colours=c(\"#FAEE1C\",\"#F6F5F5\",\"#DBA51E\",\n                                   \"#7B0C1B\",\"#990B19\",\"#D41D40\",\"#F05A7D\",\"#F02A71\"))\n    \n  \n  ggplot(accidentsByWeather, aes(STATE,FATALS, fill = WEATHER)) + geom_bar(position = \"fill\", stat = 'identity')\n  ggplot(accidentsByWeather, aes(STATE,FATALS)) + geom_bar(aes(fill = accidentsByWeather$WEATHER), position = \"fill\", stat = 'identity')\n  ggplot(accidentsByWeather, aes(STATE,FATALS)) + geom_bar(aes(fill = accidentsByWeather$WEATHER), stat = 'identity')\n  ",
+    "created" : 1489199726250.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3017936300",
+    "id" : "60E4CD41",
+    "lastKnownWriteTime" : 1489252660,
+    "last_content_update" : 1489253445020,
+    "path" : "~/R/FARS/0314 assignment_poster.R",
+    "project_path" : "0314 assignment_poster.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
